@@ -5,12 +5,16 @@ interface IYoutubeVideo {
   lengthText: string
 }
 
+// https://www.youtube.com/@wanderbraun-UA/videos
+// https://www.youtube.com/@Wanderbraun-AgeofEmpires/videos
+// https://www.youtube.com/@Wanderbraun/videos
+// https://www.youtube.com/@wanderbraun-vods/videos
+
 export const getYoutubeVideos = async (): Promise<string> => {
   const url = 'https://www.youtube.com/@Wanderbraun/videos'
   const initialPhrase = 'var ytInitialData = '
   let request = await fetch(url)
   const requestText = await request.text()
-  const tab = '/@Wanderbraun/videos'
   const beginingIndex = requestText.indexOf(initialPhrase)
   const endingIndex = requestText.indexOf('</script>', beginingIndex)
   const sliceJS = requestText.slice(beginingIndex + initialPhrase.length, endingIndex - 1)
